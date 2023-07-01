@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #checking for root user permissions
-if [ uid -ne 0]
+if [ uid -ne 0 ]
 then
     echo "Please run a a sudo user"
     exit 1
