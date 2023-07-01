@@ -18,7 +18,10 @@ validate () {
         echo "Installation of $2 is failed"
         exit 2
     else
-        echo " Installing $2 "
+        for $2 in ${tools[@]}
+        do
+            echo " Installing $2 "
+        done
     fi
 }
 
