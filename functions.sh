@@ -21,6 +21,12 @@ validate () {
 #calling a function and passing parameters
 validate $? Git
 yum install git -y
+echo " Installation of Git is successull"
 
 validate $? wget
 yum install wget -y
+echo " Installation of wget is successull"
+
+validate $? vim 
+yum install vim -y
+echo " Installation of vim is successull"
