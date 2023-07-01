@@ -2,7 +2,7 @@
 
 path=/home/centos
 
-date=$(date +%F)
+date=$(date +%F-%H-%M-%S)
 log_file=$date.log
 
 input=$(find /home/centos -name "*.log" -type f -mtime +14)
