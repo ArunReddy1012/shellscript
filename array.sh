@@ -23,7 +23,7 @@ validate () {
 }
 
 #tools to be used
-tools=("git" "wget" "vim" "nano")
+tools=("git" "wget" "vim" "nano" "telnet")
 
 #calling a function and passing parameters
 validate $? ${tools[@]}
