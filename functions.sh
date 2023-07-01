@@ -1,7 +1,11 @@
 #!/bin/bash
 
+date=$(date +%F-%H-%M-%S)
+log=$date.log
+
+uid=$(id -u)
 #checking for root user permissions
-if [ uid -ne 0 ]
+if [ $uid -ne 0 ]
 then
     echo "Please run a a sudo user"
     exit 1
@@ -20,13 +24,13 @@ validate () {
 
 #calling a function and passing parameters
 validate $? Git
-yum install git -y
-echo " Installation of Git is successull"
+yum install git -y >> $log
+echo " Installation of Git is successull" >> $log
 
 validate $? wget
-yum install wget -y
-echo " Installation of wget is successull"
+yum install wget -y >> $log
+echo " Installation of wget is successull" >> $log
 
 validate $? vim 
-yum install vim -y
-echo " Installation of vim is successull"
+yum install vim -y >> $log
+echo " Installation of vim is successull" >> $log
