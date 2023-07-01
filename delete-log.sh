@@ -5,7 +5,7 @@ path=/home/centos
 date=$(date +%F)
 log_file=$date.log
 
-input=$(find /home/centos -name "*.log" -type -f -mtime +14)
+input=$(find /home/centos -name "*.log" -type f -mtime +14)
 
 while IFS= read line;
 do 
