@@ -26,9 +26,9 @@ validate () {
 tools=("git" "wget" "vim" "nano")
 
 #calling a function and passing parameters
-validate $? $tools[@]
-yum install $tools[@] -y >> $log
-echo " Installation of $tools[@] is successull" >> $log
+validate $? ${tools[@]}
+yum install ${tools[@]} -y >> $log
+echo " Installation of ${tools[@]} is successull" >> $log
 
 # validate $? wget
 # yum install wget -y >> $log
