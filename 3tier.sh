@@ -12,7 +12,7 @@ N="\e[0m"
 #Tomcat URL
 TOMCAT_MINOR_VERSION=$1
 
-IF [ -z $TOMCAT_MINOR_VERSION ]
+if [ -z $TOMCAT_MINOR_VERSION ]
 then 
     echo -e " $R please enter the tomcat version to be installed $N "
 fi
