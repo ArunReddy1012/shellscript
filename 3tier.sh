@@ -81,4 +81,4 @@ echo "tomcat_url is : $TOMCAT_URL"
   cd /opt/tomcat
 
   wget $TOMCAT_URL &>> $log_file
-  VALIDATE $1 "DOWNLOADING TOMCAT"
+  validate $1 "DOWNLOADING TOMCAT"
