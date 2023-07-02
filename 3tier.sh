@@ -9,17 +9,6 @@ R="\e[31m"
 G="\e[32m"
 N="\e[0m"
 
-#Tomcat URL
-TOMCAT_MINOR_VERSION=$1
-
-if [ -z $TOMCAT_MINOR_VERSION ]
-then 
-    echo -e " $R please enter the tomcat version to be installed $N "
-fi
-TOMCAT_MAJOR_VERSION=$(echo $TOMCAT_MINOR_VERSION | cut -d "." -f1)
-TOMCAT_URL=https://dlcdn.apache.org/tomcat/tomcat-$TOMCAT_MAJOR_VERSION/v$TOMCAT_MINOR_VERSION/bin/apache-$TOMCAT_MINOR_VERSION.tar.gz
-echo "tomcat_url is : $TOMCAT_URL"
-
 #checking for root user permissions
 if [ $uid -ne 0 ]
 then
@@ -56,22 +45,33 @@ systemctl enable mariadb &>> $log_file
 validate $? "enabling mariadb"
 
 #CREATE DB, TABLE AND GRANTS
-echo " CREATE DATABASE student_db;
+#echo " CREATE DATABASE student_db;
 
-use student_db;
+# use student_db;
 
-CREATE TABLE if not exists student_details(id INT NOT NULL AUTO_INCREMENT, name VARCHAR(10) NOT NULL, age INT NOT NULL, PRIMARY KEY (id) );
+# CREATE TABLE if not exists student_details(id INT NOT NULL AUTO_INCREMENT, name VARCHAR(10) NOT NULL, age INT NOT NULL, PRIMARY KEY (id) );
 
-grant all privileges on student_db.* to 'student'@'localhost' identified by 'student@1';" > /tmp/student.sql
+# grant all privileges on student_db.* to 'student'@'localhost' identified by 'student@1';" > /tmp/student.sql
 
-mysql < /tmp/student.sql 
+# mysql < /tmp/student.sql 
 
-validate $? "CREATE DB, TABLE AND GRANTS" 
+# validate $? "CREATE DB, TABLE AND GRANTS" 
 
 
 ###TOMCAT
 
 #install java
- dnf install java-11-openjdk-devel
-
+dnf install java-11-openjdk-devel
 validate $? "java"
+
+#Tomcat URL
+TOMCAT_MINOR_VERSION=$1
+
+if [ -z $TOMCAT_MINOR_VERSION ]
+then 
+    echo -e " $R please enter the tomcat version to be installed $N "
+    exit 3
+fi
+TOMCAT_MAJOR_VERSION=$(echo $TOMCAT_MINOR_VERSION | cut -d "." -f1)
+TOMCAT_URL=https://dlcdn.apache.org/tomcat/tomcat-$TOMCAT_MAJOR_VERSION/v$TOMCAT_MINOR_VERSION/bin/apache-$TOMCAT_MINOR_VERSION.tar.gz
+echo "tomcat_url is : $TOMCAT_URL"
