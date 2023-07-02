@@ -18,9 +18,10 @@ fi
 validate () {
     if [ $1 -ne 0]
     then
-        echo -e "$2... is $R Failed"
+        echo -e "$2... is $R Failed $N"
     else
-        echo -e "$2... is $G Successfull"
+        echo -e "$2... is $G Successfull $N"
+    fi
 }
 
 #installing mariadb
