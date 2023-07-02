@@ -36,3 +36,14 @@ validate $? "starting mariadb"
 #enable mariadb
 systemctl enable mariadb
 validate $? "enabling mariadb"
+
+#CREATE DB, TABLE AND GRANTS
+echo " CREATE DATABASE student_db;
+
+use student_db;
+
+CREATE TABLE if not exists student_details(id INT NOT NULL AUTO_INCREMENT, name VARCHAR(10) NOT NULL, age INT NOT NULL, PRIMARY KEY (id) );
+
+grant all privileges on student_db.* to 'student'@'localhost' identified by 'student@1';" > /tmp/student.sql
+
+validate $? "CREATE DB, TABLE AND GRANTS" 
