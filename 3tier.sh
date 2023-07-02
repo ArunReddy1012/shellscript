@@ -1,7 +1,7 @@
 #!/bin/bash
 
 date=$(date +%F)
-log_file=$($date.log)
+log_file=$date.log
 uid=$(id -u)
 
 #colors
@@ -29,7 +29,8 @@ validate () {
 
 
 #install basic tools
-yum install wget vim net-tools java-1.8-openjdk-devel -y &&>> $log_file
+yum install wget vim net-tools -y &&>> $log_file
+
 #installing mariadb
 yum install mariadb-server -y  &>> $log_file
 validate $? "Installing mariadb"
@@ -54,3 +55,11 @@ grant all privileges on student_db.* to 'student'@'localhost' identified by 'stu
 mysql < /tmp/student.sql 
 
 validate $? "CREATE DB, TABLE AND GRANTS" 
+
+
+#TOMCAT
+
+#install java
+ dnf install java-11-openjdk-devel
+
+validate $? "java"
