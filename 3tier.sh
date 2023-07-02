@@ -9,6 +9,16 @@ R="\e[31m"
 G="\e[32m"
 N="\e[0m"
 
+#Tomcat URL
+TOMCAT_MINOR_VERSION=$1
+
+IF [ -z $TOMCAT_MINOR_VERSION ]
+then 
+    echo -e " $R please enter the tomcat version to be installed $N "
+TOMCAT_MAJOR_VERSION=$(echo $TOMCAT_MINOR_VERSION | cut -d "." -f1)
+TOMCAT_URL=https://dlcdn.apache.org/tomcat/tomcat-$TOMCAT_MAJOR_VERSION/v$TOMCAT_MINOR_VERSION/bin/apache-$TOMCAT_MINOR_VERSION.tar.gz
+echo "tomcat_url is : $TOMCAT_URL"
+
 #checking for root user permissions
 if [ $uid -ne 0 ]
 then
@@ -27,9 +37,10 @@ validate () {
     fi
 }
 
+###Mariadb 
 
 #install basic tools
-yum install wget vim net-tools -y &&>> $log_file
+yum install wget vim net-tools -y &>> $log_file
 
 #installing mariadb
 yum install mariadb-server -y  &>> $log_file
@@ -57,7 +68,7 @@ mysql < /tmp/student.sql
 validate $? "CREATE DB, TABLE AND GRANTS" 
 
 
-#TOMCAT
+###TOMCAT
 
 #install java
  dnf install java-11-openjdk-devel
