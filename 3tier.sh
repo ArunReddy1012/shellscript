@@ -27,7 +27,7 @@ validate () {
     fi
 }
 
-###Mariadb 
+###Mariadb BLOCK
 
 #install basic tools
 yum install wget vim net-tools -y &>> $log_file
@@ -58,7 +58,7 @@ validate $? "enabling mariadb"
 # validate $? "CREATE DB, TABLE AND GRANTS" 
 
 
-###TOMCAT
+###TOMCAT BLOCK
 
 #install java
 dnf install java-11-openjdk-devel
@@ -75,3 +75,10 @@ fi
 TOMCAT_MAJOR_VERSION=$(echo $TOMCAT_MINOR_VERSION | cut -d "." -f1)
 TOMCAT_URL=https://dlcdn.apache.org/tomcat/tomcat-$TOMCAT_MAJOR_VERSION/v$TOMCAT_MINOR_VERSION/bin/apache-$TOMCAT_MINOR_VERSION.tar.gz
 echo "tomcat_url is : $TOMCAT_URL"
+
+  #
+  mkdir -p /opt/tomcat
+  cd /opt/tomcat
+
+  wget $TOMCAT_URL &>> $log_file
+  VALIDATE $1 "DOWNLOADING TOMCAT"
