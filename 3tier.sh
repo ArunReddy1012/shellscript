@@ -1,5 +1,7 @@
 #!/bin/bash
 
+date=$(date +%F)
+log_file=$($date.log)
 uid=$(id -u)
 
 #colors
@@ -25,16 +27,19 @@ validate () {
     fi
 }
 
+
+#install basic tools
+yum install wget vim net-tools java-1.8-openjdk-devel -y &&>> $log_file
 #installing mariadb
-yum install mariadb-server -y
+yum install mariadb-server -y  &>> $log_file
 validate $? "Installing mariadb"
 
 #start mariadb
-systemctl start mariadb
+systemctl start mariadb &>> $log_file
 validate $? "starting mariadb"
 
 #enable mariadb
-systemctl enable mariadb
+systemctl enable mariadb &>> $log_file
 validate $? "enabling mariadb"
 
 #CREATE DB, TABLE AND GRANTS
@@ -46,6 +51,6 @@ CREATE TABLE if not exists student_details(id INT NOT NULL AUTO_INCREMENT, name 
 
 grant all privileges on student_db.* to 'student'@'localhost' identified by 'student@1';" > /tmp/student.sql
 
-mysql < /tmp/student.sql
+mysql < /tmp/student.sql 
 
 validate $? "CREATE DB, TABLE AND GRANTS" 
