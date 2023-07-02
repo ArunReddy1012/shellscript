@@ -15,6 +15,7 @@ TOMCAT_MINOR_VERSION=$1
 IF [ -z $TOMCAT_MINOR_VERSION ]
 then 
     echo -e " $R please enter the tomcat version to be installed $N "
+fi
 TOMCAT_MAJOR_VERSION=$(echo $TOMCAT_MINOR_VERSION | cut -d "." -f1)
 TOMCAT_URL=https://dlcdn.apache.org/tomcat/tomcat-$TOMCAT_MAJOR_VERSION/v$TOMCAT_MINOR_VERSION/bin/apache-$TOMCAT_MINOR_VERSION.tar.gz
 echo "tomcat_url is : $TOMCAT_URL"
