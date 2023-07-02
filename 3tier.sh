@@ -46,4 +46,6 @@ CREATE TABLE if not exists student_details(id INT NOT NULL AUTO_INCREMENT, name 
 
 grant all privileges on student_db.* to 'student'@'localhost' identified by 'student@1';" > /tmp/student.sql
 
+mysql < /tmp/student.sql
+
 validate $? "CREATE DB, TABLE AND GRANTS" 
